@@ -2,10 +2,12 @@ import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 import { scanRequestSchema } from "@/lib/validations/scan"
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function POST(request: Request) {
   try {
@@ -22,6 +24,7 @@ export async function POST(request: Request) {
 
     const { name, email, phone } = parsed.data
 
+    const supabaseAdmin = getAdminClient()
     // Upsert user — match on email, update name/phone if changed
     const { data: user, error: userError } = await supabaseAdmin
       .from("users")

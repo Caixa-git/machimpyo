@@ -1,12 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
-import { resend } from '@/lib/email/client'
+import { getResend } from '@/lib/email/client'
 import { ScanResultEmail } from '@/lib/email/templates/scan-result'
 import { NextRequest, NextResponse } from 'next/server'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function POST(request: NextRequest) {
   const { scanId } = await request.json()
@@ -15,6 +17,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'scanId가 필요합니다' }, { status: 400 })
   }
 
+  const supabase = getAdminClient()
   // get scan with exposures
   const { data: scan, error: scanError } = await supabase
     .from('scans')
@@ -45,6 +48,7 @@ export async function POST(request: NextRequest) {
   }))
 
   // send email
+  const resend = getResend()
   const { error: emailError } = await resend.emails.send({
     from: '클리어미 <onboarding@resend.dev>',
     to: user.email,

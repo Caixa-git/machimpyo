@@ -110,7 +110,7 @@ export default function MachimpyoPage() {
         <button className="nav-hamburger" onClick={() => setMobileOpen(!mobileOpen)}>
           <span></span><span></span><span></span>
         </button>
-        <a href="/machimpyo/signup" className="nav-b">가입하기</a>
+        <a href="/machimpyo/auth/signup" className="nav-b">가입하기</a>
       </nav>
 
       <div className={`nav-mobile ${mobileOpen ? 'open' : ''}`}>
@@ -125,31 +125,38 @@ export default function MachimpyoPage() {
 
       {/* ===== HERO ===== */}
       <section className="hero">
-        <div className="hero-sub">옥스퍼드대 Internet Institute 연구 (2019)</div>
+        <div className="hero-sub">사후 디지털 계정 정리 서비스</div>
         <h1>
-          2070년, 죽은 계정이<br />
-          <span className="hl">산 사람 계정을 추월합니다</span>
+          내가 떠난 뒤 남는 계정,<br />
+          <span className="hl">가족 대신 정리해드립니다</span>
         </h1>
         <p className="hero-p">
-          Facebook 기준입니다. 하지만 같은 현상은 모든 SNS와 온라인 서비스에서 일어나고 있습니다.<br />
-          문제는 죽은 계정이 가만히 있지 않다는 겁니다.
+          네이버, 카카오, 구글, SNS, 커머스 계정을 미리 등록해두면
+          사망 확인 후 위임장 발송, 삭제 요청, 미응답 플랫폼 법적 조치까지 마침표가 진행합니다.
+          <br />
+          유족은 비밀번호도, 고객센터 절차도 몰라도 됩니다.
         </p>
+        <div className="hero-points" aria-label="핵심 가치 제안">
+          <div className="hero-point">21+개 서비스 계정 정리</div>
+          <div className="hero-point">유족 개입 없이 자동 진행</div>
+          <div className="hero-point">30일 미응답 시 법적 조치 대행</div>
+        </div>
         <div className="hero-actions">
-          <a href="/machimpyo/signup" className="btn-p">지금 준비하기</a>
+          <a href="/machimpyo/auth/signup" className="btn-p">지금 준비하기</a>
           <button className="btn-s" onClick={() => scrollTo('problem')}>왜 필요한가요</button>
         </div>
         <div className="hero-k">
           <div className="hero-kd">
-            <div className="ki">옥스퍼드대 공식 연구</div>
-            <div className="kd">Oxford Internet Institute, Big Data &amp; Society 저널 (2019)</div>
+            <div className="ki">가입 시 한 번 준비</div>
+            <div className="kd">CSV 업로드와 위임장 작성으로 정리 대상 계정을 미리 등록합니다.</div>
           </div>
           <div className="hero-kd">
-            <div className="ki">Time · Guardian · BBC 보도</div>
-            <div className="kd">전 세계 매체가 인용한 디지털 묘지 논의</div>
+            <div className="ki">사망 후 자동 진행</div>
+            <div className="kd">계정 삭제 요청, 상태 확인, 유족 안내까지 마침표가 이어서 처리합니다.</div>
           </div>
           <div className="hero-kd">
-            <div className="ki">실제 사기 수법으로 연결</div>
-            <div className="kd">방치된 계정 → 해킹 → 유족 사칭 (경찰 경고)</div>
+            <div className="ki">끝까지 책임지는 구조</div>
+            <div className="kd">30일 안에 응답이 없으면 법적 절차까지 대행해 방치로 끝나지 않게 합니다.</div>
           </div>
         </div>
       </section>
@@ -351,7 +358,7 @@ export default function MachimpyoPage() {
               name: 'BASIC', price: '2,900', unit: '원/월',
               desc: '나를 위한 디지털 정리',
               features: ['CSV 업로드 계정 등록', '21+개 서비스 스캔', '사망 감지 (공공 마이데이터)', 'SNS·포털·커머스 말소', '게임 계정 말소 포함', '디지털 유언장 포함', '삭제 제외 계정 지정', '이메일 요청 발송', '법적 조치 대행'],
-              link: '/machimpyo/signup'
+              link: '/machimpyo/auth/signup'
             },
           ].map((plan, i) => (
             <div className="pc f" key={i}>
@@ -395,7 +402,7 @@ export default function MachimpyoPage() {
         <div className="cta-dot">。</div>
         <h2>당신의 디지털 유산,<br />가족을 위해 지금 준비하세요</h2>
         <p className="cs">당신이 준비하면 유족은 아무것도 할 필요가 없습니다.<br />계정 자동 발견, 사망 감지, 삭제 대행, 법적 조치까지 월 2,900원.</p>
-        <a href="/machimpyo/signup" className="btn-p">월 2,900원 — 30일 무료</a>
+        <a href="/machimpyo/auth/signup" className="btn-p">월 2,900원 — 30일 무료</a>
         <div className="cf">언제든 해지 가능 · 30일 내 전액 환불 · 위임장 즉시 폐기</div>
       </section>
 

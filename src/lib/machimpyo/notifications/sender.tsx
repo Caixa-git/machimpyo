@@ -1,8 +1,6 @@
-import { Resend } from 'resend'
+import { getResend } from '@/lib/email/client'
 import { render } from '@react-email/render'
 import { DeathNoticeEmail } from './templates/death-notice'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 interface SendDeathNoticeParams {
   to: string
@@ -26,6 +24,7 @@ export async function sendDeathNoticeEmail({
     />
   )
 
+  const resend = getResend()
   const { data, error } = await resend.emails.send({
     from: '마침표 <notice@machimpyo.kr>',
     to,

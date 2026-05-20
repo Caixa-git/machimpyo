@@ -307,9 +307,32 @@
 }
 .machimpyo .hero-punch .hl { color: var(--navy); background: none; -webkit-background-clip: unset; -webkit-text-fill-color: unset; background-clip: unset; }
 .machimpyo .hero-p {
-  font-size: clamp(16px,1.8vw,18px); color: var(--t2); max-width: 480px;
+  font-size: clamp(16px,1.8vw,18px); color: var(--t2); max-width: 560px;
   line-height: 1.9; margin-bottom: 28px;
   animation: fade-up .8s ease .45s both;
+}
+.machimpyo .hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 760px;
+  margin: 0 auto 28px;
+  animation: fade-up .8s ease .52s both;
+}
+.machimpyo .hero-point {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(30,58,95,.12);
+  background: rgba(30,58,95,.04);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 .machimpyo .hero-actions {
   display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px;

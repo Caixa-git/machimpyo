@@ -201,6 +201,46 @@ export default function SignupPage() {
             })}
           </div>
 
+          {/* CSV Upload button */}
+          <div style={{ marginBottom: 12 }}>
+            <button
+              onClick={() => {
+                const input = document.createElement('input')
+                input.type = 'file'
+                input.accept = '.csv,.tsv,.txt'
+                input.onchange = async (e) => {
+                  const file = (e.target as HTMLInputElement).files?.[0]
+                  if (!file) return
+                  try {
+                    const formData = new FormData()
+                    formData.append('file', file)
+                    const res = await fetch('/api/csv-parse', { method: 'POST', body: formData })
+                    const data = await res.json()
+                    if (res.ok && data.accounts) {
+                      const existingNames = new Set(accounts.map(a => a.name))
+                      const newOnes = data.accounts
+                        .filter((a: any) => !existingNames.has(a.service_name))
+                        .map((a: any) => ({ name: a.service_name, id: '', pw: '' }))
+                      setAccounts([...accounts, ...newOnes])
+                    }
+                  } catch {}
+                }
+                input.click()
+              }}
+              style={{
+                width: '100%', background: 'rgba(30,58,95,.04)', border: '1px dashed rgba(30,58,95,.15)',
+                borderRadius: 12, padding: '12px 14px', cursor: 'pointer',
+                fontSize: 13, color: '#5a4f42', fontFamily: 'inherit',
+                transition: 'border-color .2s',
+              }}
+            >
+              📄 CSV 파일로 불러오기 — e프라이버시 클린서비스 CSV 업로드
+            </button>
+            <p style={{ fontSize: 11, color: '#b0a694', marginTop: 4 }}>
+              e프라이버시 클린서비스에서 내려받은 CSV를 업로드하면 자동으로 서비스를 찾아냅니다.
+            </p>
+          </div>
+
           {/* Selected account tags (no ID/pw input) */}
           {accounts.length > 0 && (
             <div style={{
