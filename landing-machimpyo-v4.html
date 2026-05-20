@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마침표 — 가입하고 잊으세요</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9pt..40pt,100..1000;1,9pt..40pt,100..1000&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0b0b0c; --bg2: #0f0f11; --bg3: #141416; --bg4: #1a1a1e;
+  --blue: #0052ff;
+  --text: #e8e8e8; --text2: rgba(255,255,255,0.55); --text3: rgba(255,255,255,0.3);
+  --radius: 56px; --card: 20px;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans KR', 'DM Sans', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text); background: var(--bg); line-height: 1.6; overflow-x: hidden;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(11,11,12,0.85); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); display: inline-block; transition: transform .3s; }
+.nav-logo:hover .nav-dot { transform: scale(1.4); }
+.nav-word { font-weight: 700; font-size: 19px; letter-spacing: 2px; }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: var(--text3); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: #fff; }
+.nav-cta { background: var(--blue); color: #fff; border: none; border-radius: var(--radius); padding: 10px 26px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s; font-family: inherit; }
+.nav-cta:hover { background: #0045d9; }
+
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 120px 24px 40px;
+  position: relative;
+  background: radial-gradient(ellipse 700px 500px at 50% 25%, rgba(0,82,255,0.07) 0%, transparent 65%), var(--bg);
+}
+.hero h1 {
+  font-size: clamp(36px, 7vw, 68px); font-weight: 700;
+  line-height: 1.15; letter-spacing: -2px; max-width: 720px; margin-bottom: 10px;
+}
+.hero h1 .hl { color: var(--blue); }
+.hero h1 .line2 { display: block; }
+.hero-punch {
+  font-size: clamp(22px, 3.5vw, 40px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hero-punch .hl { color: var(--blue); }
+.hero-sub {
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--text2);
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+
+.btn-primary {
+  background: var(--blue); color: #fff; border: none;
+  border-radius: var(--radius); padding: 16px 40px;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  font-family: inherit; letter-spacing: .3px;
+}
+.btn-primary:hover { background: #0045d9; transform: scale(1.02); box-shadow: 0 0 30px rgba(0,82,255,.25); }
+.btn-secondary {
+  background: transparent; color: var(--text2);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius); padding: 16px 38px;
+  font-size: 16px; font-weight: 500; cursor: pointer;
+  transition: all .2s; font-family: inherit;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,.2); color: #fff; }
+
+.hero-key {
+  display: flex; gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 780px;
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.hero-key-item {
+  flex: 1; padding: 20px 16px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+.hero-key-item:last-child { border-right: none; }
+.hero-key-item .k-icon { font-size: 22px; margin-bottom: 6px; }
+.hero-key-item .k-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.hero-key-item .k-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+.section { padding: 80px 24px; max-width: 1080px; margin: 0 auto; }
+.section-alt { background: var(--bg2); }
+.section2 { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--blue); margin-bottom: 8px; }
+.section-title { font-size: clamp(26px, 4vw, 38px); font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; line-height: 1.25; }
+.section-sub { font-size: 15px; color: var(--text2); max-width: 520px; line-height: 1.8; }
+
+/* ===== DETECTION ===== */
+.detect-section { background: radial-gradient(ellipse 500px 400px at 30% 50%, rgba(0,82,255,0.05) 0%, transparent 60%), var(--bg2); }
+.detect-flow { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; max-width: 680px; }
+.detect-row { display: flex; gap: 16px; align-items: flex-start; background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); border-radius: 14px; padding: 20px; transition: border-color .2s; }
+.detect-row:hover { border-color: rgba(0,82,255,0.15); }
+.detect-rank { flex: 0 0 36px; font-family: 'DM Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--blue); text-align: center; padding-top: 2px; }
+.detect-rank .badge { display: block; font-size: 9px; font-weight: 600; color: var(--text3); letter-spacing: 1px; }
+.detect-body { flex: 1; }
+.detect-body h4 { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+.detect-body p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.detect-body .tag { display: inline-block; margin-top: 6px; background: rgba(0,82,255,0.08); border: 1px solid rgba(0,82,255,0.1); border-radius: 56px; padding: 2px 10px; font-size: 10px; color: var(--blue); font-weight: 600; }
+
+/* ===== NOTICE TONE ===== */
+.notice-section { max-width: 720px; margin: 0 auto; text-align: center; padding: 60px 24px; }
+.notice-section blockquote {
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 500;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  border-left: 3px solid var(--blue);
+  padding-left: 24px;
+  text-align: left;
+  max-width: 500px;
+  margin: 24px auto 0;
+}
+.notice-mock {
+  background: var(--bg3); border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px; padding: 24px; max-width: 480px; margin: 28px auto 0;
+  text-align: left;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.8;
+}
+.notice-mock .nm-from { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+.notice-mock .nm-subject { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+.notice-mock .nm-body { line-height: 1.8; }
+.notice-mock .nm-highlight { color: var(--blue); font-weight: 500; }
+.notice-mock .nm-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); margin-right: 8px; }
+
+/* ===== STEPS ===== */
+.steps-grid { display: flex; gap: 16px; margin-top: 28px; }
+.step-card { flex: 1; background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--card); padding: 28px; position: relative; }
+.step-card .s-num { font-family: 'DM Sans', sans-serif; font-size: 36px; font-weight: 700; color: rgba(0,82,255,0.08); line-height: 1; margin-bottom: 12px; }
+.step-card h4 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+.step-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ===== CHOICE ===== */
+.choice-box {
+  background: var(--bg3); border: 1px solid rgba(0,82,255,0.15);
+  border-radius: 16px; padding: 32px; margin-top: 36px; max-width: 600px;
+}
+.choice-box h4 { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+.choice-row {
+  display: flex; gap: 12px; padding: 12px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  align-items: flex-start;
+}
+.choice-row .c-input {
+  flex: 0 0 20px; margin-top: 3px;
+}
+.choice-row .c-input .dot { display: block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); }
+.choice-row .c-input .dot.filled { background: var(--blue); border-color: var(--blue); }
+.choice-row .c-label h5 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.choice-row .c-label p { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+/* ===== TIMELINE ===== */
+.tl-wrap { margin-top: 28px; }
+.tl-row { display: flex; gap: 20px; padding: 12px 0; align-items: flex-start; }
+.tl-icon { flex: 0 0 36px; text-align: center; font-size: 20px; }
+.tl-time { flex: 0 0 80px; text-align: right; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--blue); padding-top: 2px; }
+.tl-content { flex: 1; }
+.tl-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.tl-content p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.tl-content .hl2 { color: var(--blue); }
+.tl-content .hl3 { color: var(--text); font-weight: 500; }
+
+/* ===== DETAILS ===== */
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 28px; }
+.detail-item { background: var(--bg3); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 22px 16px; text-align: center; }
+.detail-item .di-icon { font-size: 20px; margin-bottom: 8px; }
+.detail-item .di-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.detail-item .di-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+/* ===== PRICING ===== */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 28px; }
+.pricing-card { background: var(--bg3); border: 1px solid rgba(255,255,255,0.05); border-radius: 18px; padding: 28px 24px; position: relative; }
+.pricing-card.featured { border-color: var(--blue); background: rgba(0,82,255,0.03); }
+.pricing-card.featured::after { content: '추천'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; font-size: 10px; font-weight: 600; padding: 3px 12px; border-radius: var(--radius); letter-spacing: 1px; }
+.pc-name { font-size: 13px; font-weight: 600; color: var(--text3); margin-bottom: 4px; letter-spacing: 1px; }
+.pc-price { font-family: 'DM Sans','Noto Sans KR',sans-serif; font-size: 38px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 2px; }
+.pc-price .u { font-size: 15px; font-weight: 400; color: var(--text3); }
+.pc-desc { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+.pc-features { list-style: none; margin-bottom: 20px; }
+.pc-features li { font-size: 13px; color: var(--text2); padding: 5px 0; display: flex; align-items: center; gap: 6px; }
+.pc-features li::before { content: '·'; color: var(--blue); font-weight: 700; font-size: 15px; }
+.pricing-card .btn-primary, .pricing-card .btn-secondary { width: 100%; text-align: center; display: block; padding: 11px; font-size: 14px; }
+
+/* ===== FAQ ===== */
+.faq-list { margin-top: 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.04); padding: 16px 0; cursor: pointer; }
+.faq-q { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.6); }
+.faq-arrow { font-size: 11px; color: var(--text3); transition: transform .25s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a { font-size: 14px; color: var(--text3); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; }
+.faq-item.open .faq-a { max-height: 400px; padding-top: 10px; }
+.faq-a strong { color: var(--text); font-weight: 600; }
+
+/* ===== CTA ===== */
+.cta-section { text-align: center; padding: 100px 24px; background: radial-gradient(ellipse 500px 400px at 50% 50%, rgba(0,82,255,0.06) 0%, transparent 60%), var(--bg); }
+.cta-dot { width: 44px; height: 44px; border-radius: 50%; background: var(--blue); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 20px; color: #fff; box-shadow: 0 0 40px rgba(0,82,255,0.2); }
+.cta-section h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -1.5px; margin-bottom: 10px; }
+.cta-section .cta-sub { font-size: 15px; color: var(--text2); max-width: 400px; margin: 0 auto 24px; line-height: 1.8; }
+.cta-section .btn-primary { font-size: 16px; padding: 18px 48px; }
+.cta-foot { margin-top: 10px; font-size: 12px; color: var(--text3); }
+
+footer { border-top: 1px solid rgba(255,255,255,0.03); padding: 36px 24px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.15); }
+footer a { color: rgba(255,255,255,0.25); text-decoration: none; }
+footer a:hover { color: #fff; }
+footer .fd { display: inline-block; width: 3px; height: 3px; border-radius: 50%; background: var(--blue); margin: 0 6px; vertical-align: middle; }
+
+@media (max-width: 700px) {
+  nav { padding: 12px 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .hero h1 { font-size: 30px; }
+  .hero-punch { font-size: 22px; }
+  .hero-key { flex-direction: column; }
+  .hero-key-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .hero-key-item:last-child { border-bottom: none; }
+  .steps-grid { flex-direction: column; }
+  .step-card { flex: none; }
+  .section { padding: 50px 20px; }
+  .section2 { padding: 50px 20px; }
+  .tl-time { flex-basis: 50px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-dot"></span>
+    <span class="nav-word">마침표</span>
+  </a>
+  <div class="nav-links">
+    <a href="#detect">찾아내는 법</a>
+    <a href="#choice">결정권</a>
+    <a href="#steps">3단계</a>
+    <a href="#price">가격</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">가입하기</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div style="font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text3);letter-spacing:4px;margin-bottom:16px;">
+    A PERIOD FOR YOUR DIGITAL LIFE.
+  </div>
+  <h1>
+    가입하고 <span class="hl">잊으세요</span>.<br>
+    <span class="line2">저희가 찾아서 연락드릴게요.</span>
+  </h1>
+  <div class="hero-punch">
+    당신이 떠나면, <span class="hl">마침표</span>가
+  </div>
+  <div class="hero-sub">
+    먼저 부고를 찾아내고, 가족에게 알립니다.<br>
+    가족의 결정이 아닌, <strong style="color:var(--text);">당신의 결정</strong>이 실행됩니다.
+  </div>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+      월 2,900원 — 가입하고 잊으세요
+    </button>
+    <button class="btn-secondary" onclick="document.getElementById('detect').scrollIntoView({behavior:'smooth'})">
+      어떻게 찾나요?
+    </button>
+  </div>
+
+  <div class="hero-key">
+    <div class="hero-key-item">
+      <div class="k-icon">🔍</div>
+      <div class="k-title">자동 부고 추적</div>
+      <div class="k-desc">전국 장례식장·e하늘·신문 부고 매일 스캔</div>
+    </div>
+    <div class="hero-key-item">
+      <div class="k-icon">📬</div>
+      <div class="k-title">가족에게 먼저 알림</div>
+      <div class="k-desc">"고인의 뜻에 따라 정리를 시작합니다"</div>
+    </div>
+    <div class="hero-key-item">
+      <div class="k-icon">⚡</div>
+      <div class="k-title">48시간 내 정리 완료</div>
+      <div class="k-desc">SNS·포털·커머스·브로커 ··· 유족 안내까지</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:flex;gap:24px;font-size:12px;color:var(--text3);flex-wrap:wrap;justify-content:center;">
+    <span>🛡️ 법적 위임장 기반</span>
+    <span>🔒 AES-256 암호화</span>
+    <span>⚖️ 고인의 의사 최우선</span>
+  </div>
+</section>
+
+<!-- ===== DETECTION ===== -->
+<section class="detect-section" id="detect">
+  <div class="section2">
+    <div class="section-label">사망 추적 시스템</div>
+    <h2 class="section-title">유족이 몰라도 됩니다.<br>저희가 먼저 찾아냅니다.</h2>
+    <p class="section-sub">한국에서 사망하면 거의 모든 가족이 부고를 냅니다. 마침표는 24시간 이 부고를 스캔합니다.</p>
+    <div class="detect-flow">
+      <div class="detect-row">
+        <div class="detect-rank">1<span class="badge">PRIMARY</span></div>
+        <div class="detect-body">
+          <h4>부고 자동 스크래핑</h4>
+          <p>e하늘 장사정보시스템, 전국 주요 장례식장 50곳, 네이버·다음 부고. 이름 + 생년월일로 DB 매칭. 매시간 자동.</p>
+          <span class="tag">정확도 95%</span>
+        </div>
+      </div>
+      <div class="detect-row">
+        <div class="detect-rank">2<span class="badge">BACKUP</span></div>
+        <div class="detect-body">
+          <h4>장기 미접속 감지</h4>
+          <p>180일 이상 로그인 없으면 유족 연락처로 "○○○ 님의 안부가 궁금합니다" 문자 발송. 부고가 없는 경우를 대비.</p>
+          <span class="tag">안전장치</span>
+        </div>
+      </div>
+      <div class="detect-row">
+        <div class="detect-rank">3<span class="badge">B2B</span></div>
+        <div class="detect-body">
+          <h4>장례식장 제휴</h4>
+          <p>전국 장례식장 POS에 마침표 연동. 고인 정보 등록 시 자동 매칭, "이 분은 마침표 가입자입니다" 안내.</p>
+          <span class="tag">Pro 이상</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOTICE TONE (NEW) ===== -->
+<section class="section">
+  <div class="notice-section">
+    <div class="section-label">유족 통지 방식</div>
+    <h2 class="section-title">알리는 것이지, 묻는 것이 아닙니다</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto;">고인이 생전에 결정한 일입니다. 유족에게 동의를 구하지 않습니다. 결정을 알리고, 완료를 알립니다.</p>
+    <div class="notice-mock">
+      <div class="nm-from">마침표 &lt;notice@machimpyo.kr&gt;</div>
+      <div class="nm-subject">○○○ 님의 디지털 흔적 정리를 시작합니다</div>
+      <div class="nm-body">
+        ○○○ 님의 부고를 확인했습니다.<br>
+        고인께서 마침표 서비스에 가입해 계셨으며,<br>
+        생전에 작성하신 위임장에 따라<br>
+        <span class="nm-highlight">등록된 계정 정리를 시작합니다.</span><br><br>
+        <span class="nm-dot"></span> 네이버 계정 — 삭제<br>
+        <span class="nm-dot"></span> 카카오톡 — 삭제<br>
+        <span class="nm-dot"></span> 인스타그램 — 추모 계정 전환<br>
+        <span class="nm-dot"></span> 쿠팡 — 해지·삭제<br><br>
+        48시간 내 완료되면 다시 알려드리겠습니다.<br>
+        <span style="color:var(--text3);font-size:12px;">삼가 고인의 명복을 빕니다.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHOICE ===== -->
+<section class="section-alt" id="choice">
+  <div class="section2">
+    <div class="section-label">당신의 선택</div>
+    <h2 class="section-title">유족이 정리를 막을 수 있을까요?<br>당신이 결정하세요.</h2>
+    <p class="section-sub">가입할 때 이 질문에 답합니다. 유족에게 정리 중단 권한을 줄지, 말지는 <strong style="color:var(--text);">당신의 결정</strong>입니다.</p>
+    <div class="choice-box">
+      <h4>사후 유족의 정리 중단 요청 권한</h4>
+      <div class="choice-row">
+        <div class="c-input"><span class="dot filled"></span></div>
+        <div class="c-label">
+          <h5>중단 불가 — 고인의 의사가 최우선입니다</h5>
+          <p>유족이 요청해도 정리를 반드시 완료합니다. 제가 결정한 일입니다.</p>
+        </div>
+      </div>
+      <div class="choice-row">
+        <div class="c-input"><span class="dot"></span></div>
+        <div class="c-label">
+          <h5>중단 가능 — 유족의 결정을 존중합니다</h5>
+          <p>유족이 요청하면 정리를 중단합니다. 단, 계정 정보는 유족에게 전달됩니다.</p>
+        </div>
+      </div>
+      <div class="choice-row" style="border-bottom:none;">
+        <div class="c-input"><span class="dot"></span></div>
+        <div class="c-label">
+          <h5>유족에게 전달 후 중단 (Pro) — 데이터는 가족에게</h5>
+          <p>계정 데이터를 유족에게 전달한 후 정리됩니다. 유족이 데이터를 보관할지, 삭제할지 선택합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STEPS ===== -->
+<section class="section" id="steps">
+  <div class="section-label">HOW IT WORKS</div>
+  <h2 class="section-title">단 3단계. 그리고 잊으세요.</h2>
+  <p class="section-sub">가입하는 순간부터 마침표가 당신을 기억합니다. 당신은 아무것도 할 필요 없어요.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="s-num">01</div>
+      <h4>가입 & 계정 등록</h4>
+      <p>네이버, 카카오, 인스타그램, 쿠팡 — 5개만 등록해도 됩니다. 유족 연락처와 정리 중단 권한을 지정합니다. 법적 위임장에 전자서명. 5분.</p>
+    </div>
+    <div class="step-card">
+      <div class="s-num">02</div>
+      <h4>평소처럼 사세요</h4>
+      <p>모든 정보는 AES-256 암호화. 하루 96원. 연 1회 계정 상태 알림만 보내드려요. 가입 사실조차 잊어도 됩니다. 저희가 기억할게요.</p>
+    </div>
+    <div class="step-card">
+      <div class="s-num">03</div>
+      <h4>저희가 먼저 찾아서 알립니다</h4>
+      <p>부고 발견 → 유족에게 문자·이메일: "○○○ 님의 위임장에 따라 정리를 시작합니다." 확인 후 48시간 내 정리 완료 + 등기우편 발송.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="section-alt">
+  <div class="section2">
+    <div class="section-label">유족 타임라인</div>
+    <h2 class="section-title">슬픔 속에서도,<br>한 가지는 걱정하지 않게</h2>
+    <p class="section-sub">가족은 아무것도 몰라도 됩니다. 마침표가 먼저 찾아서 알려드리며, 고인의 결정을 이행합니다.</p>
+    <div class="tl-wrap">
+      <div class="tl-row">
+        <div class="tl-icon">📰</div>
+        <div class="tl-time">D-0</div>
+        <div class="tl-content">
+          <h4>부고 게재</h4>
+          <p>가족이 장례식장에 부고. 마침표 시스템이 이를 감지, 가입자 DB와 매칭.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon">📱</div>
+        <div class="tl-time">+1h</div>
+        <div class="tl-content">
+          <h4>유족에게 문자</h4>
+          <p><span class="hl3">"○○○ 님의 부고를 확인했습니다. 고인께서 마침표에 가입해 계셨습니다. 고인의 위임장에 따라 정리를 시작합니다."</span></p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon">📄</div>
+        <div class="tl-time">+2h</div>
+        <div class="tl-content">
+          <h4>사망 확인</h4>
+          <p>유족이 사망진단서 사진을 제출. AI가 30초 검증.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon">⚡</div>
+        <div class="tl-time">+24h</div>
+        <div class="tl-content">
+          <h4>계정 정리 실행</h4>
+          <p>등록된 모든 계정 삭제·정리. 유족 대시보드에서 실시간 확인 가능.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-icon">📬</div>
+        <div class="tl-time">+48h</div>
+        <div class="tl-content">
+          <h4>정리 완료 + 등기우편</h4>
+          <p>이메일과 등기우편으로 완료 통지. Apple 스타일 패키지 + 정리 완료 카드.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DETAILS ===== -->
+<section class="section">
+  <div class="section-label">EVERY DETAIL</div>
+  <h2 class="section-title">당신이 몰라도 되는 디테일</h2>
+  <p class="section-sub">Apple이 제품을 설계하듯, 모든 디테일을 고려했습니다. 당신은 신경 쓸 필요 없습니다.</p>
+  <div class="detail-grid">
+    <div class="detail-item">
+      <div class="di-icon">🛡️</div>
+      <div class="di-title">2주 유예기간</div>
+      <div class="di-desc">오탐지 방지. 사망 확인 후 14일간 최종 확인.</div>
+    </div>
+    <div class="detail-item">
+      <div class="di-icon">🔐</div>
+      <div class="di-title">Zero-Knowledge 암호화</div>
+      <div class="di-desc">직원조차 당신의 계정을 볼 수 없습니다.</div>
+    </div>
+    <div class="detail-item">
+      <div class="di-icon">⚖️</div>
+      <div class="di-title">고인 의사 최우선</div>
+      <div class="di-desc">법적 위임장 + PIPC 유권해석 기반.</div>
+    </div>
+    <div class="detail-item">
+      <div class="di-icon">🔄</div>
+      <div class="di-title">재등록 모니터링</div>
+      <div class="di-desc">삭제 후 90일간 재등록 감지, 자동 재삭제.</div>
+    </div>
+    <div class="detail-item">
+      <div class="di-icon">🎴</div>
+      <div class="di-title">지갑용 QR 카드</div>
+      <div class="di-desc">"제가 쓰러지면 이 카드를 확인해주세요."</div>
+    </div>
+    <div class="detail-item">
+      <div class="di-icon">💌</div>
+      <div class="di-title">유족 메시지 (Pro)</div>
+      <div class="di-desc">마지막 인사를 남기고 떠나세요.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="section-alt" id="price">
+  <div class="section2">
+    <div class="section-label">PRICING</div>
+    <h2 class="section-title">하루 96원.<br>가입하고 영원히 잊으세요.</h2>
+    <p class="section-sub">이 가격에 부고 추적부터 계정 정리, 유족 통지, 등기우편까지 포함됩니다.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pc-name">BASIC</div>
+        <div class="pc-price">2,900<span class="u">원/월</span></div>
+        <div class="pc-desc">혼자 사는 당신을 위한 기본</div>
+        <ul class="pc-features">
+          <li>계정 10개 등록</li>
+          <li>자동 부고 스크래핑</li>
+          <li>SNS·포털·커머스 자동 정리</li>
+          <li>국제브로커 15곳 삭제</li>
+          <li>유족 문자·이메일 통지</li>
+          <li>유족 중단 권한 설정 가능</li>
+          <li>지갑용 QR 카드</li>
+        </ul>
+        <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">시작하기</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pc-name">PRO</div>
+        <div class="pc-price">4,900<span class="u">원/월</span></div>
+        <div class="pc-desc">완벽함을 원한다면</div>
+        <ul class="pc-features">
+          <li>계정 무제한 등록</li>
+          <li>Basic 모든 기능</li>
+          <li>등기우편 통지서 발송</li>
+          <li>실물 위임장 + 확인서</li>
+          <li>데이터 백업 & 다운로드</li>
+          <li>장례식장 제휴 우선 연동</li>
+          <li>유족 데이터 전달 옵션</li>
+          <li>유족 메시지 전송</li>
+          <li>24시간 우선 처리</li>
+        </ul>
+        <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">시작하기</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pc-name">FAMILY</div>
+        <div class="pc-price">9,900<span class="u">원/월</span></div>
+        <div class="pc-desc">가족 모두의 안심</div>
+        <ul class="pc-features">
+          <li>가족 4인 포함</li>
+          <li>Pro 기능 인당 제공</li>
+          <li>가족 대시보드</li>
+          <li>30일 무료 체험</li>
+        </ul>
+        <button class="btn-secondary">가족 신청</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="section-label" style="text-align:center;">FAQ</div>
+  <h2 class="section-title" style="text-align:center;">자주 묻는 질문</h2>
+  <div class="faq-list">
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">
+        가족이 마침표 서비스를 몰라도 괜찮나요?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">네, 그게 핵심입니다. 저희가 부고를 찾아내서 가족에게 먼저 연락드립니다. 가족이 서비스를 알고 있지 않아도 아무 문제 없습니다.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">
+        유족이 정리를 원하지 않으면 중단할 수 있나요?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">가입 시 결정하신 옵션에 따라 다릅니다. <strong>중단 불가</strong>를 선택하셨다면 고인의 의사가 최우선이므로 유족이 요청해도 정리가 완료됩니다. <strong>중단 가능</strong>을 선택하셨다면 유족이 요청 시 중단됩니다. 모든 것은 가입 시 당신의 선택에 따릅니다.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">
+        계정 정보는 안전한가요?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">AES-256 암호화. 암호화 키는 오직 사용자만 알 수 있으며, 직원조차 볼 수 없습니다. 사망 확인 후 유족 동의 시에만 복호화됩니다.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">
+        은행·통신사도 정리되나요?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">완전 자동화는 어렵지만, Pro 이상 가입자에게 상세 가이드 PDF를 제공합니다. 필요한 서류 양식, 연락처, 순서까지 모두 준비되어 있습니다.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q">
+        부모님께 선물하고 싶어요
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">결제 후 카카오톡 링크를 부모님께 공유. 부모님이 직접 계정 등록과 유족 지정을 하시면 됩니다. 선물용 실물 카드도 함께 발송.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="signup">
+  <div class="cta-dot">。</div>
+  <h2>가입하고 잊으세요.<br>저희가 할게요.</h2>
+  <p class="cta-sub">
+    모든 결정은 당신의 몫. 나머지는 저희가 합니다.<br>
+    당신의 디지털 흔적, 여기서 마침표를 찍으세요.
+  </p>
+  <button class="btn-primary">월 2,900원 — 30일 무료 체험</button>
+  <div class="cta-foot">언제든 해지 가능 · 30일 내 전액 환불 · 정보는 암호화 보관</div>
+</section>
+
+<footer>
+  <p><span class="fd"></span> 마침표 <span class="fd"></span></p>
+  <p style="margin-top:8px;">
+    <a href="#">이용약관</a><span class="fd"></span>
+    <a href="#">개인정보처리방침</a><span class="fd"></span>
+    <a href="#">문의</a><span class="fd"></span>
+    <a href="#">@machimpyo</a>
+  </p>
+  <p style="margin-top:10px;font-size:11px;">&copy; 2026 마침표. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

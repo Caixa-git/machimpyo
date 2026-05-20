@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마침표 — 디지털 흔적, 여기서 마침표를</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,500;9..40,600;9..40,700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f3f0;--bg2:#eeebe6;--fg:#1c1a18;--fg2:rgba(28,26,24,.55);--fg3:rgba(28,26,24,.25);--blue:#1a4b8c;--gold:#a0835a;--white:#fff;--r:56px;--c:20px}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans KR','DM Sans',sans-serif;-webkit-font-smoothing:antialiased;color:var(--fg);background:var(--bg);line-height:1.7;overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 36px;display:flex;align-items:center;justify-content:space-between;background:rgba(245,243,240,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(28,26,24,.06)}
+.nav-l{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+.nav-d{width:10px;height:10px;border-radius:50%;background:var(--blue);display:inline-block}
+.nav-w{font-weight:600;font-size:18px;letter-spacing:2px;color:var(--fg)}
+.nav-a{display:flex;align-items:center;gap:24px;font-size:14px}
+.nav-a a{color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-a a:hover{color:var(--fg)}
+.nav-b{background:var(--blue);color:var(--white);border:none;border-radius:var(--r);padding:10px 24px;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;font-family:inherit}
+.nav-b:hover{background:#153d73}
+
+/* HERO — warmer, lighter, human */
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;background:linear-gradient(180deg,#f5f3f0 0%,#eeebe6 100%)}
+.hero-dot{width:48px;height:48px;border-radius:50%;background:var(--blue);display:inline-flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:22px;color:var(--white);box-shadow:0 4px 20px rgba(26,75,140,.15)}
+.hero h1{font-size:clamp(30px,5vw,52px);font-weight:600;line-height:1.25;letter-spacing:-1.5px;max-width:640px;margin-bottom:16px}
+.hero h1 .hl{color:var(--blue)}
+.hero-p{font-size:clamp(15px,1.5vw,17px);color:var(--fg2);max-width:440px;line-height:1.9;margin-bottom:32px}
+.hero-p strong{color:var(--fg);font-weight:600}
+
+.btn-p{background:var(--blue);color:var(--white);border:none;border-radius:var(--r);padding:15px 36px;font-size:16px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 2px 12px rgba(26,75,140,.12)}
+.btn-p:hover{background:#153d73;transform:translateY(-1px);box-shadow:0 4px 20px rgba(26,75,140,.2)}
+.btn-s{background:transparent;color:var(--fg);border:1px solid rgba(28,26,24,.12);border-radius:var(--r);padding:15px 36px;font-size:16px;font-weight:500;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-s:hover{border-color:rgba(28,26,24,.3)}
+
+.hero-m{display:flex;gap:24px;margin-top:40px;font-size:13px;color:var(--fg2)}
+.hero-m span{display:flex;align-items:center;gap:6px}
+
+/* KEY METRICS BAR */
+.hero-k{display:flex;gap:0;border-radius:16px;overflow:hidden;max-width:640px;width:100%;background:var(--white);box-shadow:0 2px 16px rgba(28,26,24,.04);margin-top:36px}
+.hero-kd{flex:1;padding:16px 14px;text-align:center;border-right:1px solid rgba(28,26,24,.04)}
+.hero-kd:last-child{border-right:none}
+.hero-kd .ki{font-size:18px;color:var(--blue);font-weight:600;margin-bottom:2px}
+.hero-kd .kt{font-size:13px;color:var(--fg2)}
+
+.s{padding:80px 24px;max-width:960px;margin:0 auto}
+.s2{max-width:960px;margin:0 auto;padding:80px 24px}
+.sa{background:var(--bg2)}
+.sw{background:var(--white)}
+.sl{font-size:11px;font-weight:600;letter-spacing:3px;color:var(--blue);margin-bottom:8px}
+.st{font-size:clamp(24px,3.2vw,34px);font-weight:600;letter-spacing:-1px;margin-bottom:10px;line-height:1.3}
+.ss{font-size:15px;color:var(--fg2);max-width:480px;line-height:1.8}
+.sc{max-width:640px;margin:28px auto 0}
+
+/* STORY */
+.story{text-align:center;max-width:600px;margin:0 auto}
+.story-q{font-size:clamp(20px,2.5vw,28px);font-weight:500;line-height:1.6;color:var(--fg);margin-bottom:28px}
+.story-q .hl{color:var(--blue);font-weight:600}
+
+/* DETECTION */
+.dr{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid rgba(28,26,24,.06);border-radius:14px;padding:18px;margin-bottom:10px}
+.dr:last-child{margin-bottom:0}
+.dn{flex:0 0 28px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--blue);text-align:center;padding-top:2px}
+.dn .db{display:block;font-size:8px;font-weight:500;color:var(--fg3);letter-spacing:1px}
+.dh h4{font-size:15px;font-weight:600;margin-bottom:2px}
+.dh p{font-size:13px;color:var(--fg2);line-height:1.7}
+.dh .tag{display:inline-block;margin-top:4px;background:rgba(26,75,140,.06);border-radius:56px;padding:2px 10px;font-size:10px;color:var(--blue);font-weight:500}
+
+/* NOTICE */
+.notice{background:var(--white);border:1px solid rgba(28,26,24,.06);border-radius:14px;padding:24px;max-width:440px;margin:28px auto 0;text-align:left;font-size:13px;color:var(--fg2);line-height:1.9}
+.notice .nm{font-size:11px;color:var(--fg3);margin-bottom:6px}
+.notice .ns{font-size:14px;font-weight:600;color:var(--fg);margin-bottom:10px}
+.notice .nh{color:var(--blue);font-weight:500}
+.notice .nd{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--blue);margin-right:6px;vertical-align:middle}
+
+/* CHOICE */
+.cb{background:var(--white);border:1px solid rgba(28,26,24,.06);border-radius:16px;padding:28px;margin-top:28px}
+.cb h4{font-size:15px;font-weight:600;margin-bottom:14px}
+.cr{display:flex;gap:12px;padding:10px 0;border-top:1px solid rgba(28,26,24,.04);align-items:flex-start}
+.cr:last-child{border-bottom:none}
+.ci{flex:0 0 16px;margin-top:3px}
+.cir{display:block;width:14px;height:14px;border-radius:50%;border:2px solid rgba(28,26,24,.12)}
+.cir.f{border-color:var(--blue)}
+.cir.f::after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:var(--blue);margin:1px auto}
+.cl h5{font-size:14px;font-weight:600;margin-bottom:1px}
+.cl p{font-size:12px;color:var(--fg2);line-height:1.5}
+
+/* STEPS */
+.sg{display:flex;gap:14px;margin-top:28px}
+.scd{flex:1;background:var(--white);border:1px solid rgba(28,26,24,.06);border-radius:16px;padding:24px}
+.scd .sn{font-family:'DM Sans',sans-serif;font-size:28px;font-weight:600;color:rgba(26,75,140,.08);line-height:1;margin-bottom:10px}
+.scd h4{font-size:15px;font-weight:600;margin-bottom:4px}
+.scd p{font-size:13px;color:var(--fg2);line-height:1.7}
+
+/* PRICING */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:28px}
+.pc{background:var(--white);border:1px solid rgba(28,26,24,.06);border-radius:18px;padding:24px 20px;position:relative}
+.pc.f{border-color:var(--blue);box-shadow:0 2px 20px rgba(26,75,140,.06)}
+.pc.f::after{content:'추천';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--blue);color:var(--white);font-size:10px;font-weight:500;padding:3px 12px;border-radius:var(--r);letter-spacing:1px}
+.pcn{font-size:12px;font-weight:600;color:var(--fg3);margin-bottom:4px;letter-spacing:1px}
+.pcp{font-family:'DM Sans','Noto Sans KR',sans-serif;font-size:34px;font-weight:600;letter-spacing:-1.5px;margin-bottom:2px}
+.pcp .u{font-size:14px;font-weight:400;color:var(--fg3)}
+.pcd{font-size:12px;color:var(--fg3);margin-bottom:14px}
+.pcl{list-style:none;margin-bottom:18px}
+.pcl li{font-size:13px;color:var(--fg2);padding:4px 0;display:flex;align-items:center;gap:6px}
+.pcl li::before{content:'·';color:var(--blue);font-weight:700}
+.pc .btn-p,.pc .btn-s{width:100%;text-align:center;display:block;padding:10px;font-size:14px}
+
+/* FAQ */
+.fl{margin-top:28px;max-width:560px;margin-left:auto;margin-right:auto}
+.fi{border-bottom:1px solid rgba(28,26,24,.04);padding:14px 0;cursor:pointer}
+.fq{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:500;color:var(--fg2)}
+.fa{font-size:11px;color:var(--fg3);transition:transform .25s}
+.fi.open .fa{transform:rotate(180deg)}
+.fan{font-size:14px;color:var(--fg2);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s}
+.fi.open .fan{max-height:350px;padding-top:10px}
+.fan strong{color:var(--fg);font-weight:600}
+
+/* CTA */
+.cta{text-align:center;padding:100px 24px;background:var(--bg)}
+.cta h2{font-size:clamp(24px,3.2vw,36px);font-weight:600;letter-spacing:-1px;margin-bottom:10px}
+.cta .cs{font-size:15px;color:var(--fg2);max-width:380px;margin:0 auto 24px;line-height:1.8}
+.cta .btn-p{font-size:16px;padding:18px 48px}
+.cta .cf{margin-top:10px;font-size:12px;color:var(--fg3)}
+
+footer{border-top:1px solid rgba(28,26,24,.04);padding:32px 24px;text-align:center;font-size:12px;color:var(--fg3)}
+footer a{color:var(--fg2);text-decoration:none}
+footer a:hover{color:var(--fg)}
+footer .fd{display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--blue);margin:0 6px;vertical-align:middle}
+
+@media(max-width:700px){
+  nav{padding:12px 20px}
+  .nav-a{display:none}
+  .nav-b{display:none}
+  .hero h1{font-size:26px}
+  .hero-k{flex-direction:column}
+  .hero-kd{border-right:none;border-bottom:1px solid rgba(28,26,24,.04)}
+  .hero-kd:last-child{border-bottom:none}
+  .hero-m{flex-direction:column;gap:6px}
+  .sg{flex-direction:column}
+  .scd{flex:none}
+  .s{padding:50px 20px}
+  .s2{padding:50px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-l">
+    <span class="nav-d"></span>
+    <span class="nav-w">마침표</span>
+  </a>
+  <div class="nav-a">
+    <a href="#story">이야기</a>
+    <a href="#how">방식</a>
+    <a href="#choice">결정권</a>
+    <a href="#pricing">가격</a>
+  </div>
+  <button class="nav-b" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">시작하기</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-dot">。</div>
+  <h1>
+    당신이 떠난 후,<br>
+    <span class="hl">누군가는</span> 알아야 하니까
+  </h1>
+  <p class="hero-p">
+    가족이 모르는 계정, 자동 결제, 검색에 남은 흔적.<br>
+    마침표가 <strong>알아서 찾고, 정리하고, 알립니다</strong>.
+  </p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+    <button class="btn-p" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">월 2,900원 — 시작하기</button>
+    <button class="btn-s" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">어떻게요?</button>
+  </div>
+  <div class="hero-k">
+    <div class="hero-kd">
+      <div class="ki">주민등록 사망정보</div>
+      <div class="kt">행정안전부 공공 마이데이터 연동</div>
+    </div>
+    <div class="hero-kd">
+      <div class="ki">48시간</div>
+      <div class="kt">가족 통지부터 정리 완료까지</div>
+    </div>
+    <div class="hero-kd">
+      <div class="ki">#1</div>
+      <div class="kt">국내 최초 디지털 유산 자동 정리</div>
+    </div>
+  </div>
+</section>
+
+<section class="sw" id="story">
+  <div class="s">
+    <div class="story">
+      <div class="story-q">
+        엄마가 떠나신 후,<br>
+        엄마의 <span class="hl">네이버 계정</span>을 찾아본 적 있나요?<br>
+        매달 나가던 <span class="hl">쿠팡 결제</span>는 누가 해지했나요?
+      </div>
+      <p style="font-size:15px;color:var(--fg2);line-height:1.8;max-width:440px;margin:0 auto 20px">
+        죽음 이후에도 우리의 디지털 흔적은 남아 있습니다.<br>
+        가족이 하나하나 찾아다니게 두지 마세요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="sa" id="how">
+  <div class="s2">
+    <div class="sl">사망 감지</div>
+    <h2 class="st">주민등록번호로<br>정확하게 확인합니다</h2>
+    <p class="ss">행정안전부 공공 마이데이터를 통해 사망 여부를 조회합니다. 삼성화재 등이 이미 사용 중인 검증된 방식입니다.</p>
+    <div class="sc">
+      <div class="dr">
+        <div class="dn">1<span class="db">정확</span></div>
+        <div class="dh">
+          <h4>행정안전부 사망정보 API</h4>
+          <p>가입 시 동의를 받아 공공 마이데이터를 통해 사망 여부를 주기적으로 확인합니다. 주민등록정보 기반으로 오류가 없습니다.</p>
+          <span class="tag">행정안전부 공인</span>
+        </div>
+      </div>
+      <div class="dr">
+        <div class="dn">2<span class="db">보조</span></div>
+        <div class="dh">
+          <h4>부고 스크래핑 + 장례식장 제휴</h4>
+          <p>API 확인 전이라도 부고를 통해 먼저 감지할 수 있습니다. 이중으로 확인하여 정확도를 높입니다.</p>
+          <span class="tag">이중 확인</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px">
+      <div class="sl">유족 통지</div>
+      <h2 class="st">알리는 것이지,<br>묻는 것이 아닙니다</h2>
+      <p class="ss">고인이 생전에 위임장에 서명했습니다. 가족의 동의 없이, 고인의 뜻대로 실행됩니다.</p>
+      <div class="notice">
+        <div class="nm">마침표 &lt;notice@machimpyo.kr&gt;</div>
+        <div class="ns">○○○ 님의 디지털 흔적 정리를 시작합니다</div>
+        ○○○ 님의 사망을 확인했습니다.<br>
+        고인께서 마침표 서비스에 가입해 계셨으며,<br>
+        생전에 작성하신 <span class="nh">위임장에 따라</span><br>
+        등록된 계정 정리를 시작합니다.<br><br>
+        <span class="nd"></span>네이버 계정 — 삭제<br>
+        <span class="nd"></span>카카오톡 — 삭제<br>
+        <span class="nd"></span>쿠팡 — 해지·삭제<br>
+        <span class="nd"></span>국제브로커 15곳 — 삭제 완료<br><br>
+        48시간 내 완료 시 다시 알립니다.<br>
+        <span style="color:var(--fg3);font-size:12px;">삼가 고인의 명복을 빕니다.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:48px">
+      <div class="sl">3단계</div>
+      <h2 class="st">5분 가입. 그리고 잊으세요</h2>
+      <p class="ss">가입하는 순간부터 마침표가 당신을 기억합니다. 당신은 아무것도 할 필요 없습니다.</p>
+      <div class="sg">
+        <div class="scd">
+          <div class="sn">01</div>
+          <h4>가입 & 동의</h4>
+          <p>계정을 등록하고 유족을 지정합니다. 공공 마이데이터 사망정보 조회에 동의하고 위임장에 서명합니다. 5분.</p>
+        </div>
+        <div class="scd">
+          <div class="sn">02</div>
+          <h4>잊고 사세요</h4>
+          <p>하루 96원. 연 1회 계정 알림만 보내드립니다. 매번 접속할 필요 없습니다. 저희가 주기적으로 확인합니다.</p>
+        </div>
+        <div class="scd">
+          <div class="sn">03</div>
+          <h4>저희가 찾아서 알림</h4>
+          <p>사망 확인 → 유족에게 통지. "위임장에 따라 정리합니다." 48시간 내 정리 완료 + 등기우편 발송.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sw" id="choice">
+  <div class="s">
+    <div class="sl">당신의 결정권</div>
+    <h2 class="st">유족이 정리를 막을 수 있나요?<br>당신이 정하세요</h2>
+    <p class="ss">가입할 때 한 번만 선택하면 됩니다. 이 결정은 법적 효력이 있습니다.</p>
+    <div class="cb">
+      <h4>사후 유족의 정리 중단 요청 권한</h4>
+      <div class="cr">
+        <div class="ci"><span class="cir f"></span></div>
+        <div class="cl">
+          <h5>중단 불가 — 고인의 의사가 최우선입니다</h5>
+          <p>유족이 요청해도 정리를 완료합니다. 제가 결정한 일입니다.</p>
+        </div>
+      </div>
+      <div class="cr">
+        <div class="ci"><span class="cir"></span></div>
+        <div class="cl">
+          <h5>중단 가능 — 유족의 결정을 존중합니다</h5>
+          <p>유족이 요청하면 정리를 중단하고, 계정 정보를 유족에게 전달합니다.</p>
+        </div>
+      </div>
+      <div class="cr">
+        <div class="ci"><span class="cir"></span></div>
+        <div class="cl">
+          <h5>데이터 전달 후 중단 (Pro)</h5>
+          <p>계정 데이터를 유족에게 전달한 후 정리. 유족이 보관할지 선택합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sa" id="pricing">
+  <div class="s2">
+    <div class="sl">가격</div>
+    <h2 class="st">하루 96원,<br>영원한 평안</h2>
+    <p class="ss">공공 마이데이터 연동부터 계정 정리, 유족 통지, 등기우편까지 모두 포함.</p>
+    <div class="pg">
+      <div class="pc">
+        <div class="pcn">BASIC</div>
+        <div class="pcp">2,900<span class="u">원/월</span></div>
+        <div class="pcd">혼자라면 이걸로 충분</div>
+        <ul class="pcl">
+          <li>계정 10개 등록</li>
+          <li>사망정보 API 자동 확인</li>
+          <li>SNS·포털·커머스 정리</li>
+          <li>국제브로커 15곳 삭제</li>
+          <li>유족 문자·이메일 통지</li>
+          <li>유족 중단 권한 설정</li>
+        </ul>
+        <button class="btn-p" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">시작하기</button>
+      </div>
+      <div class="pc f">
+        <div class="pcn">PRO</div>
+        <div class="pcp">4,900<span class="u">원/월</span></div>
+        <div class="pcd">완벽하게 정리하려면</div>
+        <ul class="pcl">
+          <li>계정 무제한 등록</li>
+          <li>Basic 모든 기능</li>
+          <li>등기우편 통지서</li>
+          <li>실물 위임장 + 확인서</li>
+          <li>데이터 백업 & 다운로드</li>
+          <li>유족 데이터 전달 옵션</li>
+          <li>유족 메시지 전송</li>
+          <li>24시간 우선 처리</li>
+        </ul>
+        <button class="btn-p" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">시작하기</button>
+      </div>
+      <div class="pc">
+        <div class="pcn">FAMILY</div>
+        <div class="pcp">9,900<span class="u">원/월</span></div>
+        <div class="pcd">가족 모두의 안심</div>
+        <ul class="pcl">
+          <li>가족 4인 포함</li>
+          <li>Pro 기능 인당 제공</li>
+          <li>가족 대시보드</li>
+          <li>30일 무료 체험</li>
+        </ul>
+        <button class="btn-s">가족 신청</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sw" id="faq">
+  <div class="s">
+    <div class="sl" style="text-align:center">FAQ</div>
+    <h2 class="st" style="text-align:center">궁금한 점</h2>
+    <div class="fl">
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">주민등록번호를 넘겨도 안전한가요?<span class="fa">▼</span></div>
+        <div class="fan">AES-256 암호화로 저장됩니다. 마침표는 공공 마이데이터 인증 사업자로 등록되어, 행정안전부의 보안 기준을 준수합니다. 사망 확인 외에는 사용되지 않습니다.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">가족이 서비스를 몰라도 괜찮나요?<span class="fa">▼</span></div>
+        <div class="fan">네. 저희가 먼저 찾아서 연락드립니다. 가족이 모르고 있어도 아무 문제 없습니다.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">유족이 정리를 원하지 않으면?<span class="fa">▼</span></div>
+        <div class="fan">가입 시 선택한 옵션에 따라 다릅니다. <strong>중단 불가</strong>를 선택했다면 고인의 의사가 최우선입니다.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">은행·통신사도 정리되나요?<span class="fa">▼</span></div>
+        <div class="fan">완전 자동화는 어렵지만, Pro 이상 가입자에게 상세 가이드 PDF를 제공합니다.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">부모님께 선물하고 싶어요<span class="fa">▼</span></div>
+        <div class="fan">결제 후 카카오톡 링크를 부모님께 보내드립니다. 선물용 실물 카드도 발송.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div style="width:44px;height:44px;border-radius:50%;background:var(--blue);display:inline-flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:20px;color:var(--white);box-shadow:0 4px 20px rgba(26,75,140,.15)">。</div>
+  <h2>가입하고 잊으세요.<br>저희가 할게요</h2>
+  <p class="cs">당신의 디지털 흔적, 여기서 마침표를 찍습니다.<br>삼성가족 걱정하지 마세요.</p>
+  <button class="btn-p">월 2,900원 — 30일 무료</button>
+  <div class="cf">언제든 해지 가능 · 30일 내 전액 환불</div>
+</section>
+
+<footer>
+  <p><span class="fd"></span> 마침표 <span class="fd"></span></p>
+  <p style="margin-top:6px">
+    <a href="#">이용약관</a><span class="fd"></span>
+    <a href="#">개인정보처리방침</a><span class="fd"></span>
+    <a href="#">문의</a>
+  </p>
+  <p style="margin-top:8px">&copy; 2026 마침표</p>
+</footer>
+
+</body>
+</html>
