@@ -10,7 +10,7 @@
  * and submits. Most require email verification or SMS — this script handles
  * the initial submission. Manual email verification step still required.
  *
- * Reference: ~/clearme/docs/broker-research-20260520.md
+ * Reference: docs/broker-research-20260520.md
  */
 
 import type { Page } from 'playwright';
